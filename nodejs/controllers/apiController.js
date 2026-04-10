@@ -24,8 +24,21 @@ const getDateRangeByState = (req, res) => {
     try{
         const state = req.params.state;
         const filteredSalesData = salesData.filter(sale => sale.State.toLowerCase() === state.toLowerCase());
-        const minDate = Math.min(...filteredSalesData.map(sale => new Date(sale["Order Date"])));
-        const maxDate = Math.max(...filteredSalesData.map(sale => new Date(sale["Order Date"])));
+        //const minDate = Math.min(...filteredSalesData.map(sale => new Date(sale["Order Date"])));
+        //const maxDate = Math.max(...filteredSalesData.map(sale => new Date(sale["Order Date"])));
+        
+        let minDate = Infinity;
+        let maxDate = -Infinity;
+
+        for (const sale of salesData) {
+            if (sale.State.toLowerCase() === state.toLowerCase()) {
+                const date = new Date(sale["Order Date"]).getTime();
+
+                if (date < minDate) minDate = date;
+                if (date > maxDate) maxDate = date;
+            }
+        }
+        
         res.status(200).json({
             status: 'success',
             data: {
