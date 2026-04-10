@@ -5,6 +5,7 @@ import {
   PieChart, Pie, Cell, CartesianGrid
 } from "recharts";
 import { ThemeContext } from "../context/ThemeContext";
+import SEO from "../components/SEO";
 
 // Colors from the Figma design
 const COLORS = ["#3498db", "#f39c12", "#5dade2", "#ebedef"];
@@ -103,6 +104,11 @@ export default function Dashboard() {
 
   return (
     <div className="container-fluid">
+
+      <SEO 
+        title="Dashboard | Sales Analytics"
+        description="View sales insights, charts, and analytics by state, category, and products."
+      />
       
       {/* Header + Filters */}
       <div className="d-flex justify-content-between align-items-center mb-4">
